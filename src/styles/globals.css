@@ -25,3 +25,33 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+textarea {
+  resize: none;
+  width: 98%;
+  height: 98%;
+  position: absolute;
+  top: 0px;
+  border: none;
+  margin: 1%;
+  font-family: 'PT Mono', monospace;
+  font-size: 1.5em;
+  overflow: hidden;
+  color: #000;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.speeddial button {
+  background-color: #1e4e64;
+  color: #fff;
+}
+
+.speeddial button:hover {
+  background-color: #1888bb;
+  color: #fff;
+}
