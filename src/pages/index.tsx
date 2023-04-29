@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import { jsPDF } from "jspdf";
@@ -48,7 +49,11 @@ export default function Home() {
 
   const handleSave = () => {
     localStorage.setItem("text", text);
-    setState({ open: true, message: "Saved to local storage", type: "success" });
+    setState({
+      open: true,
+      message: "Saved to local storage",
+      type: "success",
+    });
   };
 
   const handleShare = async () => {
@@ -134,6 +139,7 @@ export default function Home() {
           {state.message}
         </Alert>
       </Snackbar>
+      <Analytics />
     </main>
   );
 }
