@@ -47,12 +47,13 @@ export default function Home() {
   };
 
   const handleSave = () => {
-    //save to local storage
     localStorage.setItem("text", text);
-
+    setState({ open: true, message: "Saved to local storage", type: "success" });
   };
 
   const handleShare = async () => {
+    if (navigator.share === undefined)
+      return setState({ open: true, message: "Not supported", type: "error" });
     try {
       await window.navigator.share({
         title: "Share from text-online",
@@ -62,7 +63,11 @@ export default function Home() {
 
       setState({ open: true, message: "Shared successfully", type: "success" });
     } catch (error: any) {
-      setState({ open: true, message: `Error sharing - ${error.message} `, type: "error" });
+      setState({
+        open: true,
+        message: `Error sharing - ${error.message} `,
+        type: "error",
+      });
     }
   };
 
@@ -73,12 +78,15 @@ export default function Home() {
     }
   }, []);
 
-
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
-      <textarea id="textarea" onChange={handleChange} defaultValue={text}></textarea>
+      <textarea
+        id="textarea"
+        onChange={handleChange}
+        defaultValue={text}
+      ></textarea>
       <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: "fixed", bottom: 30, right: 50 }}
@@ -118,7 +126,11 @@ export default function Home() {
         message={state.message}
         key={"top" + "right"}
       >
-        <Alert onClose={handleClose} severity={state.type} sx={{ width: "100%" }}>
+        <Alert
+          onClose={handleClose}
+          severity={state.type}
+          sx={{ width: "100%" }}
+        >
           {state.message}
         </Alert>
       </Snackbar>
